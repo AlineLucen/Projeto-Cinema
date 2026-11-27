@@ -1,0 +1,250 @@
+/* ==========================================
+   1. RESET E CONFIGURAÇÕES GLOBAIS
+   ========================================== */
+
+/* O seletor universal (*) aplica estilos a todos os elementos da página */
+* {
+  margin: 0;           /* Remove a margem padrão de todos os elementos */
+  padding: 0;          /* Remove o espaçamento interno padrão */
+  box-sizing: border-box; /* Garante que padding e bordas não aumentem a largura total dos elementos */
+}
+
+/* Estilização base do corpo (body) da página */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Define a fonte padrão limpa e moderna */
+  background-color: #0f172a; /* Cor de fundo escura (azul-marinho profundo) */
+  color: #f8fafc;            /* Cor padrão do texto em tom claro */
+  line-height: 1.6;          /* Aumenta o espaçamento entre as linhas para facilitar a leitura */
+  
+  /* USO DO FLEXBOX NO BODY:
+     Torna o corpo um container flexível em coluna, garantindo que o rodapé 
+     fique sempre colado na parte inferior da tela, mesmo se o conteúdo for curto. */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;         /* Ocupa no mínimo 100% da altura da janela visível (viewport) */
+}
+
+
+/* ==========================================
+   2. CABEÇALHO (HEADER) - USO DE FLEXBOX
+   ========================================== */
+
+.header {
+  background-color: #1e293b; /* Cor de fundo um pouco mais clara que o body */
+  padding: 1rem 2rem;        /* Espaçamento interno em cima/baixo e nas laterais */
+  
+  /* USO DO FLEXBOX:
+     Organiza o logotipo e o menu de navegação em coluna no celular 
+     e alinha horizontalmente em telas maiores. */
+  display: flex;
+  flex-direction: column;
+  align-items: center;       /* Centraliza os itens horizontalmente */
+  gap: 1rem;                 /* Cria um espaço seguro entre o título e os links */
+  border-bottom: 2px solid #334155; /* Linha sutil de separação na parte inferior */
+}
+
+.header h1 {
+  color: #38bdf8;            /* Cor azul vibrante para o logotipo do cinema */
+  font-size: 1.8rem;         /* Tamanho grande para dar destaque ao nome */
+}
+
+.header .nav {
+  display: flex;             /* Usa Flexbox para colocar os links do menu lado a lado */
+  gap: 1.5rem;               /* Espaçamento horizontal entre cada link do menu */
+}
+
+.header .nav a {
+  color: #cbd5e1;            /* Cor cinza claro para os links inativos */
+  text-decoration: none;     /* Remove o sublinhado padrão dos links */
+  font-weight: 600;          /* Deixa o texto do menu semi-negrito */
+  transition: color 0.2s;    /* Adiciona uma transição suave ao mudar de cor */
+}
+
+.header .nav a:hover {
+  color: #38bdf8;            /* Muda a cor do link para azul claro ao passar o mouse */
+}
+
+
+/* ==========================================
+   3. CONTAINER PRINCIPAL E HERO
+   ========================================== */
+
+.container {
+  flex: 1;                   /* Faz o container crescer e ocupar o espaço livre, empurrando o rodapé */
+  width: 90%;                /* Ocupa 90% da largura da tela em dispositivos móveis */
+  max-width: 1100px;         /* Limita a largura máxima em computadores para não esticar demais */
+  margin: 2rem auto;         /* Centraliza o container horizontalmente na tela com margem vertical */
+  display: flex;             /* Organiza os blocos internos em formato flexível */
+  flex-direction: column;    /* Empilha os elementos internos em coluna */
+  gap: 2rem;                 /* Espaçamento padrão entre as seções internas */
+}
+
+.hero {
+  text-align: center;        /* Centraliza o texto da seção de apresentação */
+}
+
+.hero h2 {
+  font-size: 2rem;           /* Tamanho de destaque para o título da seção */
+  margin-bottom: 0.5rem;     /* Espaço abaixo do título */
+  color: #f1f5f9;            /* Cor branca suave para o título */
+}
+
+.hero p {
+  color: #94a3b8;            /* Cor cinza intermediária para a descrição */
+}
+
+
+/* ==========================================
+   4. GRADE DE FILMES - USO DE CSS GRID
+   ========================================== */
+
+.movie-grid {
+  /* USO DO CSS GRID:
+     Cria colunas automáticas e responsivas. Cada card terá no mínimo 280px de largura 
+     e o operador `1fr` distribui o espaço excedente igualmente, sem precisar de media queries complexas. */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;                 /* Espaçamento uniforme entre os cards da grade */
+}
+
+.movie-card {
+  background-color: #1e293b; /* Fundo do cartão combinando com o header */
+  border-radius: 10px;       /* Arredonda as bordas do cartão */
+  overflow: hidden;          /* Esconde qualquer conteúdo que ultrapasse as bordas arredondadas */
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3); /* Sombra elegante ao redor do card */
+  transition: transform 0.3s ease; /* Animação suave para o efeito de zoom/elevação */
+}
+
+.movie-card:hover {
+  transform: translateY(-5px); /* Eleva o cartão levemente para cima ao passar o mouse */
+}
+
+.movie-card img {
+  width: 100%;               /* Faz a imagem ocupar 100% da largura do cartão */
+  height: 380px;             /* Define uma altura fixa padrão para os pôsteres */
+  object-fit: cover;         /* Corta a imagem proporcionalmente para cobrir a área sem distorcer */
+  display: block;            /* Remove espaçamentos indesejados abaixo da imagem */
+}
+
+.movie-info {
+  padding: 1.5rem;           /* Espaçamento interno para o título e informações do filme */
+}
+
+.movie-info h3 {
+  font-size: 1.25rem;        /* Tamanho do título do filme */
+  margin-bottom: 0.5rem;     /* Espaço entre o título e o gênero */
+  color: #f8fafc;            /* Cor clara para destacar o nome do filme */
+}
+
+.movie-info p {
+  color: #94a3b8;            /* Cor mais suave para as informações técnicas (duração, gênero) */
+  font-size: 0.9rem;         /* Fonte um pouco menor para as legendas */
+}
+
+
+/* ==========================================
+   5. PÁGINA DE DETALHES DO FILME - FLEXBOX
+   ========================================== */
+
+.detail-container {
+  background-color: #1e293b; /* Fundo do bloco de detalhes */
+  border-radius: 12px;       /* Bordas arredondadas */
+  padding: 2rem;             /* Espaçamento interno confortável */
+  display: flex;             /* Usa Flexbox para organizar a imagem e o texto */
+  flex-direction: column;    /* No celular, empilha a imagem em cima e o texto embaixo */
+  gap: 2rem;                 /* Espaço entre a imagem e o bloco de texto */
+  box-shadow: 0 10px 20px rgba(0,0,0,0.4); /* Sombra profunda para destaque */
+}
+
+.detail-image img {
+  width: 100%;               /* Imagem ocupa toda a largura disponível no celular */
+  max-height: 450px;         /* Limita a altura máxima da imagem de detalhes */
+  object-fit: cover;         /* Evita distorções na imagem principal */
+  border-radius: 8px;        /* Bordas arredondadas na imagem de detalhes */
+}
+
+.detail-content {
+  display: flex;             /* Organiza os textos internos em coluna */
+  flex-direction: column;
+  gap: 1rem;                 /* Espaçamento entre os elementos textuais (título, sinopse, botão) */
+}
+
+.detail-content h2 {
+  font-size: 2rem;           /* Título grande do filme detalhado */
+  color: #38bdf8;            /* Cor azul de destaque */
+}
+
+.badge {
+  background-color: #334155; /* Fundo de destaque para a tag de gênero/duração */
+  color: #38bdf8;            /* Cor do texto da tag */
+  padding: 0.4rem 0.8rem;    /* Espaçamento interno da etiqueta */
+  border-radius: 4px;        /* Arredondamento sutil da tag */
+  font-size: 0.85rem;        /* Fonte menor */
+  align-self: flex-start;    /* Impede que a tag ocupe 100% da largura (encaixa no texto) */
+  font-weight: bold;         /* Deixa o texto em negrito */
+}
+
+.synopsis {
+  color: #cbd5e1;            /* Cor clara e legível para a sinopse longa */
+  line-height: 1.8;          /* Entrelinha maior para facilitar a leitura do parágrafo */
+}
+
+.back-btn {
+  display: inline-block;     /* Permite aplicação correta de margens e preenchimentos em links */
+  margin-top: 1rem;          /* Espaço acima do botão de voltar */
+  background-color: #0284c7; /* Cor de fundo azul padrão de botão */
+  color: #ffffff;            /* Texto branco no botão */
+  padding: 0.75rem 1.5rem;   /* Tamanho interno do botão */
+  border-radius: 6px;        /* Bordas arredondadas do botão */
+  text-decoration: none;     /* Remove o sublinhado do link */
+  font-weight: bold;         /* Texto em negrito */
+  align-self: flex-start;    /* Mantém o botão com o tamanho proporcional ao texto */
+  transition: background-color 0.2s; /* Transição suave de cor ao passar o mouse */
+}
+
+.back-btn:hover {
+  background-color: #0369a1; /* Azul mais escuro ao passar o mouse no botão */
+}
+
+
+/* ==========================================
+   6. RODAPÉ (FOOTER)
+   ========================================== */
+
+.footer {
+  background-color: #1e293b; /* Fundo alinhado com o cabeçalho */
+  color: #64748b;            /* Cor cinza discreta para os direitos autorais */
+  text-align: center;        /* Centraliza o texto do rodapé */
+  padding: 1.5rem;           /* Espaçamento interno do rodapé */
+  border-top: 2px solid #334155; /* Linha superior de acabamento */
+}
+
+
+/* ==========================================
+   7. MEDIA QUERIES (RESPONSIVIDADE PARA TELAS MAIORES)
+   ========================================== */
+
+/* Regras aplicadas automaticamente em telas com largura mínima de 768px (Tablets e Desktops) */
+@media (min-width: 768px) {
+  
+  /* Transforma o cabeçalho em linha horizontal (logo na esquerda, menu na direita) */
+  .header {
+    flex-direction: row;
+    justify-content: space-between; /* Empurra os itens para as extremidades opostas */
+    padding: 1rem 4rem;
+  }
+
+  /* Transforma a página de detalhes em um layout lado a lado (Imagem à esquerda, texto à direita) */
+  .detail-container {
+    flex-direction: row;
+    align-items: center;       /* Alinha verticalmente ao centro */
+  }
+
+  .detail-image {
+    flex: 1;                 /* Faz a imagem ocupar metade do espaço flexível */
+  }
+
+  .detail-content {
+    flex: 1.2;                 /* Dá um pouco mais de espaço proporcional para o texto */
+  }
+}
